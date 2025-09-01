@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
+const dbURI = "mongodb+srv://autohunter:Kim7340@autohunter.mchm6yb.mongodb.net/unified?retryWrites=true&w=majority&appName=autohunter";
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
+    await mongoose.connect(dbURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
