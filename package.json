@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "vercel dev"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +18,8 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "mongoose": "^8.18.0",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "vercel": "^46.1.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

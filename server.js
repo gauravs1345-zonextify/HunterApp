@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import listingRoutes from "./routes/listingRoutes.js";
 import syncRoutes from './routes/syncData.js';
-// import { sendToZoho } from './crmData.js';
-// import { sendToZoho } from './crmData.js';
 
 
 import path from 'path';
