@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
       const data = listings; // ✅ already a usable array
       const now = new Date();
       const oneDayAgo = new Date();
-      oneDayAgo.setDate(now.getDate() - 2);
+      oneDayAgo.setDate(now.getDate() - 1);
 
       console.log("oneDayAgo" + oneDayAgo);
    
