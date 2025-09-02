@@ -4,9 +4,6 @@
   "type": "module",
   "description": "",
   "main": "server.js",
-  "engines": {
-  "node": "22.x"
-},
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
