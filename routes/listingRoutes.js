@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   try {
     const listings = await Listing.find().lean(); // lean() returns plain JS objects
-    console.log("Fetched Listings:", listings);   // Log to verify structure
+    // console.log("Fetched Listings:", listings);   // Log to verify structure
     res.status(200).json(listings);
   } catch (err) {
     console.error("Error fetching listings:", err.message);
