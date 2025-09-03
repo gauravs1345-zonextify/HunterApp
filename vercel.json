@@ -5,5 +5,11 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/server.js" }
-  ]
+  ],
+  "cron": {
+    "sync": {
+      "path": "/routes/syncData.js",
+      "schedule": "*/10 * * * *"
+    }
+  }
 }
