@@ -1,42 +1,37 @@
-import express from "express";
+import dotenv from "dotenv";
+import connectDB from "../config/db.js";
 import Listing from "../model/Listing.js";
 
-const router = express.Router();
+dotenv.config();
 
-// GET /listings — fetch all listings
-router.get("/", async (req, res) => {
+function chunkArray(array, size) {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
+}
+
+export default async function handler(req, res) {
   try {
-    const listings = await Listing.find().lean(); // lean() returns plain JS objects
+    await connectDB();
 
-    //**************** */
+    const listings = await Listing.find().lean();
+    console.log("🔄 Zoho sync started at", new Date().toISOString());
 
-      console.log("🔄 Zoho sync started at", new Date().toISOString());
+    const now = new Date();
+    const oneDayAgo = new Date();
+    oneDayAgo.setDate(now.getDate() - 1);
 
-      function chunkArray(array, size) {
-        const chunks = [];
-        for (let i = 0; i < array.length; i += size) {
-          chunks.push(array.slice(i, i + size));
-        }
-        return chunks;
-      }
-      
-      const data = listings; // ✅ already a usable array
-      const now = new Date();
-      const oneDayAgo = new Date();
-      oneDayAgo.setDate(now.getDate() - 1);
+    const zohoPayloads = [];
 
-      console.log("oneDayAgo" + oneDayAgo);
-   
-
-      const zohoPayloads = [];
-
-      data.forEach(item => {
+    listings.forEach(item => {
       const timestamp = item["Processing timestamp"];
       if (!timestamp) return;
 
       const itemDate = new Date(timestamp * 1000);
       if (itemDate >= oneDayAgo && itemDate <= now) {
-        const mapped = {
+        zohoPayloads.push({
           Listing_Title: item["Listing title"],
           Company: item["Company/Dealer name"],
           ContactName: item["Contact person name"],
@@ -63,15 +58,14 @@ router.get("/", async (req, res) => {
           Listing_Date: itemDate.toISOString().split('T')[0],
           Options: Array.isArray(item["Options list"]) ? item["Options list"].join(", ") : "",
           Images: Array.isArray(item["images"]) ? item["images"].join(", ") : ""
-        };
-
-        zohoPayloads.push(mapped);
+        });
       }
     });
 
-     console.log(`✅ Prepared ${zohoPayloads.length} listings for Zoho CRM`);
-     const batches = chunkArray(zohoPayloads, 50);
-     for (let i = 0; i < batches.length; i++) {
+    console.log(`✅ Prepared ${zohoPayloads.length} listings for Zoho CRM`);
+
+    const batches = chunkArray(zohoPayloads, 50);
+    for (let i = 0; i < batches.length; i++) {
       const batch = batches[i];
       const zohoResponse = await fetch('https://www.zohoapis.eu/crm/v7/functions/getmongodb_data/actions/execute?auth_type=apikey&zapikey=1003.b5548ba22119b0ba123c552679cd05ed.6c1cc7eba1040e39975ca3adf0986fa6', {
         method: 'POST',
@@ -83,16 +77,13 @@ router.get("/", async (req, res) => {
       });
 
       const result = await zohoResponse.text();
-      console.log(`📤 Batch ${i + 1} response:`, result);
+      // console.log(`📤 Batch ${i + 1} response:`, result);
     }
 
     console.log("✅ Sync complete. Total listings synced:", zohoPayloads.length);
-    //**************** */
-    res.status(200).json(zohoPayloads.length);
+    res.status(200).json({ synced: zohoPayloads.length });
   } catch (err) {
-    console.error("Error fetching listings:", err.message);
+    console.error("❌ Sync failed:", err.message);
     res.status(500).json({ error: err.message });
   }
-});
-
-export default router;
+}
