@@ -5,11 +5,5 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/server.js" }
-  ],
-  "cron": {
-    "sync": {
-      "path": "/api/sync",
-      "schedule": "*/10 * * * *"
-    }
-  }
+  ]
 }
