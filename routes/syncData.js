@@ -77,7 +77,7 @@ export default async function handler(req, res) {
       });
 
       const result = await zohoResponse.text();
-      console.log(`📤 Batch ${i + 1} response:`, result);
+      // console.log(`📤 Batch ${i + 1} response:`, result);
     }
 
     console.log("✅ Sync complete. Total listings synced:", zohoPayloads.length);
