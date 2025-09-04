@@ -87,6 +87,7 @@ export default async function handler(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
+<<<<<<< HEAD
 
 
 
@@ -194,3 +195,5 @@ export default async function handler(req, res) {
 // });
 
 // export default router;
+=======
+>>>>>>> 195d79b9ae40ab685e14513cffc61d9a4cdc2e32
