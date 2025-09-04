@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
     const now = new Date();
     const oneDayAgo = new Date();
-    oneDayAgo.setDate(now.getDate() - 5);
+    oneDayAgo.setDate(now.getDate() - 1);
 
     const zohoPayloads = [];
 
