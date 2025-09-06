@@ -1,3 +1,4 @@
+// api/listings/[id].js
 import connectDB from '../../config/db.js';
 import Listing from '../../model/Listing.js';
 
