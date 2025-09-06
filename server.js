@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import listingRoutes from "./routes/listingRoutes.js";
 import syncRoutes from './routes/syncData.js';
+import getListingByIdRoute from "./routes/getListingById.js";
 
 
 import path from 'path';
@@ -21,6 +22,7 @@ connectDB();
 // Get All MongoDB Data
 app.use("/listings", listingRoutes);
 app.use("/sync", syncRoutes);
+app.use("/listing", getListingByIdRoute);
 
 
 app.post('/sync', async (req, res) => {

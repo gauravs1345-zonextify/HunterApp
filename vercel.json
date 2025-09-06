@@ -8,13 +8,8 @@
   ],
   "cron": {
     "sync": {
-<<<<<<< HEAD
         "path": "/api/sync",
          "schedule": "*/10 * * * *"
-=======
-      "path": "/routes/syncData.js",
-      "schedule": "*/10 * * * *"
->>>>>>> 195d79b9ae40ab685e14513cffc61d9a4cdc2e32
     }
   }
 }
