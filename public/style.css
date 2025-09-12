@@ -85,6 +85,14 @@
     border-radius: 4px;
     font-size: 14px;
     width: 120px; /* Adjust as needed */
+
+
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 100;
 }
 
 .more-filters-button {
@@ -105,6 +113,7 @@
 
 /* Car Leads List */
 .car-card {
+  display: flex;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -114,30 +123,53 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+.car-card {
+  display: flex;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 900px;
+  padding: 1.5rem;
+  font-family: 'Segoe UI', sans-serif;
+  gap: 20px;
+}
+
+/* Image section: 20% width */
+.car-image {
+  flex: 0 0 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .car-image img {
-  width: 80%;
+  width: 100%;
   height: auto;
   border-radius: 8px;
   object-fit: cover;
 }
 
-.car-name {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-top: 1rem;
-  color: #333;
-}
-
+/* Details section: 80% width */
 .car-details-grid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin-top: 1rem;
+}
+
+.car-name {
+  grid-column: span 3;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
 .detail-item {
-  background: #f7f7f7;
-  padding: 0.75rem;
+  /* background: #f7f7f7;
+  padding: 0.75rem; */
+  display: flex;
   border-radius: 6px;
   font-size: 0.95rem;
   color: #333;
@@ -150,25 +182,116 @@
   margin-bottom: 4px;
 }
 
-.car-features {
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
-  color: #444;
+/* Pagination Code  */
+.pagination-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
 }
 
-.details-link {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
+.pagination-controls button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-controls button:hover {
   background-color: #007bff;
   color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
 }
 
-.details-link:hover {
+.pagination-controls .active-page {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.6);
+}
+
+
+
+
+
+.button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.button:hover {
   background-color: #0056b3;
 }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+}
+
+.filter-group label {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.filter-group select,
+.filter-group input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+
+
+.pagination-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.pagination-controls button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-controls button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination-controls .active-page {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.6);
+}
+ 
+
+
 
